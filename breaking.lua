@@ -1,11 +1,6 @@
-local mt = getrawmetatable(game)
-local old = mt.__namecall
-setreadonly(mt, false)
-mt.__namecall = newcclosure(function(self, ...)
-    local method = getnamecallmethod()
-    if method == "FireServer" or method == "InvokeServer" then
-        print("[OUT]", self:GetFullName(), ...)
+-- list semua ModuleScript di game
+for _, v in ipairs(game:GetDescendants()) do
+    if v:IsA("ModuleScript") then
+        print(v:GetFullName())
     end
-    return old(self, ...)
-end)
-setreadonly(mt, true)
+end
