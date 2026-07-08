@@ -1,10 +1,11 @@
+-- iterate pelan-pelan biar gak trigger rate limit
 for _, v in ipairs(game:GetDescendants()) do
     if v:IsA("ModuleScript") then
-        local ok, result = pcall(require, v)
-        if ok and type(result) == "table" then
-            for k, val in pairs(result) do
-                print(v:GetFullName(), k, type(val))
-            end
+        local name = v.Name:lower()
+        if name:find("combat") or name:find("hit") or name:find("mine") 
+        or name:find("swing") or name:find("tool") or name:find("damage") then
+            print(v:GetFullName())
+            task.wait(0.1) -- delay antar request
         end
     end
 end
